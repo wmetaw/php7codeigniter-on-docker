@@ -1,0 +1,64 @@
+# dataコンテナ
+datastore:
+  build: ./datastore
+
+
+# nginx 1.11.5
+nginx: 
+  build: ./nginx
+  ports: 
+    - "8080:80"
+  links: 
+    - php
+  volumes_from:
+    - datastore
+
+
+# php:7.1-fpm
+php: 
+  build: ./php
+  # 別コンテナのエイリアスを設定 （リンク）
+  links:
+    - mariadb
+    - redis
+    - memcached
+  # [ホスト]：[コンテナ] ホストのディレクトリ以下をコンテナのパスにマウント
+  volumes:
+    - /Users/ryo/work/app/php/:/var/www/html/
+
+
+# mariadb
+mariadb:
+  image: mariadb:10.1
+  # 環境変数
+  environment:
+    MYSQL_ROOT_PASSWORD: password
+  expose:
+    - '3306'
+  volumes_from:
+    - datastore
+
+
+# redis
+redis:
+  image: redis:3.0.7
+  expose:
+    - '6379'
+  volumes_from:
+    - datastore
+
+
+# memcached
+memcached:
+  image: memcached:1.4.32
+  expose:
+    - '11211'
+
+
+# phpmyadmin
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin:4.6.4-1
+  ports:
+    - "8888:80"
+  links:
+    - "mariadb"
