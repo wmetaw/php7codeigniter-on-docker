@@ -24,7 +24,7 @@ php:
     - memcached
   # [ホスト]：[コンテナ] ホストのディレクトリ以下をコンテナのパスにマウント
   volumes:
-    - /Users/ryo/work/app/php/:/var/www/html/
+    - ./php/:/var/www/html/
 
 
 # mariadb
@@ -61,4 +61,9 @@ phpmyadmin:
   ports:
     - "8888:80"
   links:
-    - "mariadb"
+    - mariadb
+  environment:
+    - PMA_ARBITRARY=1
+    - PMA_HOST=mariadb
+    - PMA_USER=root
+    - PMA_PASSWORD=password
