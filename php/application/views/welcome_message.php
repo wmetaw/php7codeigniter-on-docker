@@ -67,8 +67,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
 
-<?php echo phpinfo(); ?>
-
 <div id="container">
 	<h1>Welcome to CodeIgniter!</h1>
 

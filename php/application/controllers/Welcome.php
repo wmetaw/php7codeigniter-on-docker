@@ -21,17 +21,17 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		// mariaDB接続確認
-		var_dump($this->load->database());
+		// var_dump($this->load->database());
 
 		// redis接続・確認
-		$this->load->driver("cache", array('adapter' => 'redis', 'key_prefix' => 'app_'));
+		// $this->load->driver("cache", array('adapter' => 'redis', 'key_prefix' => 'app_'));
 		// $this->cache->redis->save('key', 100);
 		// var_dump($this->cache->redis->get('key'));
 		// var_dump($this->cache->is_supported('redis'));
 		// var_dump($this->cache->cache_info());
 
 		// memcached接続・確認
-		$this->load->driver("cache", array('adapter' => 'memcached', 'key_prefix' => 'app_'));
+		// $this->load->driver("cache", array('adapter' => 'memcached', 'key_prefix' => 'app_'));
 		// $this->cache->memcached->save('key', 200);
 		// var_dump($this->cache->memcached->get('key'));
 		// var_dump($this->cache->memcached->is_supported("memcached"));
